@@ -1,0 +1,51 @@
+groups:
+- name: RocketMQ告警
+  rules:
+  - alert: "RocketMQ集群，磁盘空间不足"
+    expr: rocketmq_brokeruntime_commitlog_disk_ratio{Cluster="dev-rmq",Env="开发"} * 100 > 70
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{$labels.Env}}环境, {{$labels.Cluster}}集群, broker: {{$labels.brokerIP}}, 磁盘可用空间即将不足预警, 当前空间使用率为：{{$value}}%'
+      summary: '磁盘可用空间即将不足'
+  - alert: "RocketMQ集群，broker busy告警"
+    expr: rocketmq_brokeruntime_send_threadpoolqueue_headwait_timemills{Cluster="dev-rmq",Env="开发"} > 200
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{$labels.Env}}环境, {{$labels.Cluster}}集群, broker: {{$labels.brokerIP}}, 消息等待处理时间已经超过200ms'
+      summary: 'broker压力大'
+  - alert: "RocketMQ集群, 出现消息积压"
+    expr: sum(rocketmq_group_diff{Cluster="dev-rmq",Env="开发"}) by (Env, Cluster, group,topic) > 1000
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{$labels.Env}}环境, {{$labels.Cluster}}集群, 消费组{{$labels.group}}消费{{$labels.topic}}的消息时出现消息积压, 积压量为{{$value}}'
+      summary: 'RocketMQ生产环境，iot_rt_ebike_event_topic_consumer出现消息积压'
+  - alert: "RocketMQ集群, broker节点挂了"
+    expr: count(rocketmq_broker_tps{Cluster="dev-rmq",Env="开发"}) by (Env, Cluster) < 2
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{$labels.Env}}环境, {{$labels.Cluster}}集群, broker存活节点个数不足, 当前活跃节点数: {{$value}}'
+      summary: 'broker节点挂了'
+  - alert: "RocketMQ集群, 消息提交耗时太久"
+    expr: rocketmq_brokeruntime_pmdt_1to2s{Cluster="dev-rmq",Env="开发"} + on(Env, Cluster, brokerIP) rocketmq_brokeruntime_pmdt_2to3s{Cluster="dev-rmq",Env="开发"} + on(Env, Cluster, brokerIP) rocketmq_brokeruntime_pmdt_3to4s{Cluster="dev-rmq",Env="开发"} + on(Env, Cluster, brokerIP) rocketmq_brokeruntime_pmdt_4to5s{Cluster="dev-rmq",Env="开发"} + on (Env, Cluster, brokerIP) rocketmq_brokeruntime_pmdt_5to10s{Cluster="dev-rmq",Env="开发"} + on(Env, Cluster, brokerIP) rocketmq_brokeruntime_pmdt_10stomore{Cluster="dev-rmq",Env="开发"} > 0
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{$labels.Env}}环境, {{$labels.Cluster}}集群, broker: {{$labels.brokerIP}}, 最近1分钟消息提交耗时大于1s的有{{$value}}条'
+      summary: '最近1分钟存在消息提交耗时太久'
+  - alert: "RocketMQ集群，发送tps激增"
+    expr: sum(rocketmq_broker_tps{Cluster="dev-rmq",Env="开发"} - rocketmq_broker_tps{Cluster="dev-rmq",Env="开发"} offset 30s) by (Env, Cluster) > 1000
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{$labels.Env}}环境, {{$labels.Cluster}}集群, 发送tps在过去30s内出现激增, 当前增加量：{{$value}}'
+      summary: '集群发送tps激增'
