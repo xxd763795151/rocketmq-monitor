@@ -2801,7 +2801,7 @@
       "id": 59,
       "panels": [
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {},
@@ -2857,7 +2857,7 @@
           "type": "bargauge"
         },
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {},
@@ -2913,7 +2913,7 @@
           "type": "bargauge"
         },
         {
-          "datasource": null,
+          "datasource": "Prometheus",
           "fieldConfig": {
             "defaults": {
               "custom": {},
