@@ -15,10 +15,146 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 14,
-  "iteration": 1645519455283,
+  "id": 9,
+  "iteration": 1645687337625,
   "links": [],
   "panels": [
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 71,
+      "panels": [],
+      "title": "集群信息",
+      "type": "row"
+    },
+    {
+      "columns": [],
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fontSize": "80%",
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 69,
+      "pageSize": 20,
+      "showHeader": true,
+      "sort": {
+        "col": null,
+        "desc": false
+      },
+      "styles": [
+        {
+          "$$hashKey": "object:14904",
+          "alias": "Broker 名称",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "link": false,
+          "linkTargetBlank": false,
+          "linkTooltip": "消费端明细",
+          "linkUrl": "d/zkVx1w_iz/rocketmq?orgId=1&var-env=${Env}&var-cluster=${Cluster}&var-broker=${broker}&var-topic=All&var-group=$group",
+          "mappingType": 1,
+          "pattern": "broker",
+          "preserveFormat": false,
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:14905",
+          "alias": "broker IP",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": null,
+          "mappingType": 1,
+          "pattern": "brokerIP",
+          "thresholds": [
+            "1",
+            "100"
+          ],
+          "type": "number",
+          "unit": "none"
+        },
+        {
+          "$$hashKey": "object:14906",
+          "alias": "集群",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "cluster",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:14908",
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "expr": "rocketmq_broker_tps{Cluster=\"$cluster\",Env=\"$env\",broker=~\"$broker\"}",
+          "format": "table",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "集群信息",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "集群信息",
+      "transform": "table",
+      "type": "table-old"
+    },
     {
       "collapsed": true,
       "datasource": null,
@@ -26,7 +162,695 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 5
+      },
+      "id": 41,
+      "panels": [
+        {
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "purple",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "blue",
+                    "value": 60
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 70
+                  },
+                  {
+                    "color": "red",
+                    "value": 85
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 6
+          },
+          "id": 24,
+          "interval": "",
+          "links": [],
+          "options": {
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": true,
+            "showThresholdMarkers": true
+          },
+          "pluginVersion": "7.3.1",
+          "targets": [
+            {
+              "expr": "rocketmq_brokeruntime_commitlog_disk_ratio{Cluster=\"$cluster\",Env=\"$env\"}*100",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{brokerIP}}",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "磁盘空间使用百分比",
+          "type": "gauge"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "decimals": 0,
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {}
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 13
+          },
+          "hiddenSeries": false,
+          "id": 20,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true,
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.1",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(rocketmq_brokeruntime_pmdt_0ms{Cluster=\"$cluster\",Env=\"$env\"})",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "0ms",
+              "refId": "A"
+            },
+            {
+              "expr": "sum(rocketmq_brokeruntime_pmdt_0to10ms{Cluster=\"$cluster\",Env=\"$env\"})",
+              "interval": "",
+              "legendFormat": "0-10ms",
+              "refId": "B"
+            },
+            {
+              "expr": "sum(rocketmq_brokeruntime_pmdt_10to50ms{Cluster=\"$cluster\",Env=\"$env\"})",
+              "interval": "",
+              "legendFormat": "10-50ms",
+              "refId": "C"
+            },
+            {
+              "expr": "sum(rocketmq_brokeruntime_pmdt_50to100ms{Cluster=\"$cluster\",Env=\"$env\"})",
+              "interval": "",
+              "legendFormat": "50-100ms",
+              "refId": "D"
+            },
+            {
+              "expr": "sum(rocketmq_brokeruntime_pmdt_100to200ms{Cluster=\"$cluster\",Env=\"$env\"})",
+              "interval": "",
+              "legendFormat": "100-200ms",
+              "refId": "E"
+            },
+            {
+              "expr": "sum(rocketmq_brokeruntime_pmdt_200to500ms{Cluster=\"$cluster\",Env=\"$env\"})",
+              "interval": "",
+              "legendFormat": "200-500ms",
+              "refId": "F"
+            },
+            {
+              "expr": "sum(rocketmq_brokeruntime_pmdt_500to1s{Cluster=\"$cluster\",Env=\"$env\"})",
+              "interval": "",
+              "legendFormat": "500ms-1s",
+              "refId": "G"
+            },
+            {
+              "expr": "sum(rocketmq_brokeruntime_pmdt_1to2s{Cluster=\"$cluster\",Env=\"$env\"})",
+              "interval": "",
+              "legendFormat": "1-2s",
+              "refId": "H"
+            },
+            {
+              "expr": "sum(rocketmq_brokeruntime_pmdt_2to3s{Cluster=\"$cluster\",Env=\"$env\"})",
+              "interval": "",
+              "legendFormat": "2-3s",
+              "refId": "I"
+            },
+            {
+              "expr": "sum(rocketmq_brokeruntime_pmdt_3to4s{Cluster=\"$cluster\",Env=\"$env\"})+sum(rocketmq_brokeruntime_pmdt_4to5s{Cluster=\"$cluster\",Env=\"$env\"})+sum(rocketmq_brokeruntime_pmdt_5to10s{Cluster=\"$cluster\",Env=\"$env\"})+sum(rocketmq_brokeruntime_pmdt_10stomore{Cluster=\"$cluster\",Env=\"$env\"})",
+              "interval": "",
+              "legendFormat": ">3s",
+              "refId": "J"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "集群每分钟写入消息不同耗时区间趋势",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "none",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "decimals": -1,
+              "format": "none",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "decimals": 0,
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {}
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 13
+          },
+          "hiddenSeries": false,
+          "id": 57,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true,
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.1",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(rocketmq_brokeruntime_pmdt_200to500ms{Cluster=\"$cluster\",Env=\"$env\"}) by (brokerIP) + sum(rocketmq_brokeruntime_pmdt_500to1s{Cluster=\"$cluster\",Env=\"$env\"}) by (brokerIP)+sum(rocketmq_brokeruntime_pmdt_1to2s{Cluster=\"$cluster\",Env=\"$env\"}) by (brokerIP)+sum(rocketmq_brokeruntime_pmdt_2to3s{Cluster=\"$cluster\",Env=\"$env\"}) by (brokerIP)+sum(rocketmq_brokeruntime_pmdt_3to4s{Cluster=\"$cluster\",Env=\"$env\"}) by (brokerIP)+sum(rocketmq_brokeruntime_pmdt_4to5s{Cluster=\"$cluster\",Env=\"$env\"}) by (brokerIP)+sum(rocketmq_brokeruntime_pmdt_5to10s{Cluster=\"$cluster\",Env=\"$env\"}) by (brokerIP)+sum(rocketmq_brokeruntime_pmdt_10stomore{Cluster=\"$cluster\",Env=\"$env\"}) by (brokerIP)",
+              "interval": "",
+              "legendFormat": "{{brokerIP}}",
+              "refId": "F"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "可能限流的broker（写入耗时超过200ms的消息数大于0）",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": -2,
+              "format": "none",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "decimals": 0,
+              "format": "none",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "decimals": 0,
+          "description": "broker收到请求后暂存队列，经过多久后才进行处理，反映broker此时的繁忙程度",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {}
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 22
+          },
+          "hiddenSeries": false,
+          "id": 28,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "hideEmpty": true,
+            "hideZero": false,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true,
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.1",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "repeat": null,
+          "repeatDirection": "h",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "rocketmq_brokeruntime_send_threadpoolqueue_headwait_timemills{Cluster=\"$cluster\",Env=\"$env\"}",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{brokerIP}}-发送请求",
+              "refId": "C"
+            },
+            {
+              "expr": "rocketmq_brokeruntime_pull_threadpoolqueue_headwait_timemills{Cluster=\"$cluster\",Env=\"$env\"}",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{brokerIP}}-拉取请求",
+              "refId": "A"
+            },
+            {
+              "expr": "rocketmq_brokeruntime_query_threadpoolqueue_headwait_timemills{Cluster=\"$cluster\",Env=\"$env\"}",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{brokerIP}}-查询请求",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "请求等待处理耗时",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "decimals": 0,
+          "description": "broker收到请求后暂存队列，经过多久后才进行处理，反映broker此时的繁忙程度",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {}
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 22
+          },
+          "hiddenSeries": false,
+          "id": 68,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": true,
+            "hideZero": false,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true,
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.1",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "repeatDirection": "h",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "rocketmq_brokeruntime_dispatch_behind_bytes{Cluster=\"$cluster\",Env=\"$env\"}",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{brokerIP}}",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "已提交commit log等待构建消费队列的消息大小",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:7758",
+              "decimals": 2,
+              "format": "bytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:7759",
+              "decimals": 0,
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {}
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 30
+          },
+          "hiddenSeries": false,
+          "id": 10,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "hideEmpty": true,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true,
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pluginVersion": "7.3.1",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "max(rocketmq_group_get_latency_by_storetime{Cluster=\"$cluster\",Env=\"$env\",broker=~\"$broker\",group=~\"$group\",topic=~\"$topic\"}) by(group, topic, broker)",
+              "interval": "",
+              "legendFormat": "{{broker}}-{{topic}}@{{group}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "消息消费的滞后时间（发送到broker经过多少时间还未消费）",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "none",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "集群运行状态",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 6
       },
       "id": 35,
       "panels": [
@@ -48,7 +872,7 @@
             "h": 7,
             "w": 11,
             "x": 0,
-            "y": 1
+            "y": 3
           },
           "hiddenSeries": false,
           "id": 12,
@@ -107,7 +931,6 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:63977",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -116,7 +939,6 @@
               "show": true
             },
             {
-              "$$hashKey": "object:63978",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -148,7 +970,7 @@
             "h": 7,
             "w": 13,
             "x": 11,
-            "y": 1
+            "y": 3
           },
           "hiddenSeries": false,
           "id": 31,
@@ -246,7 +1068,7 @@
             "h": 10,
             "w": 15,
             "x": 0,
-            "y": 8
+            "y": 10
           },
           "hiddenSeries": false,
           "id": 2,
@@ -353,7 +1175,7 @@
             "h": 10,
             "w": 9,
             "x": 15,
-            "y": 8
+            "y": 10
           },
           "hiddenSeries": false,
           "id": 32,
@@ -461,7 +1283,7 @@
             "h": 9,
             "w": 15,
             "x": 0,
-            "y": 18
+            "y": 20
           },
           "hiddenSeries": false,
           "id": 4,
@@ -567,7 +1389,7 @@
             "h": 9,
             "w": 9,
             "x": 15,
-            "y": 18
+            "y": 20
           },
           "hiddenSeries": false,
           "id": 33,
@@ -665,7 +1487,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 1
+        "y": 7
       },
       "id": 37,
       "panels": [
@@ -687,7 +1509,7 @@
             "h": 8,
             "w": 11,
             "x": 0,
-            "y": 2
+            "y": 4
           },
           "hiddenSeries": false,
           "id": 42,
@@ -790,7 +1612,7 @@
             "h": 8,
             "w": 13,
             "x": 11,
-            "y": 2
+            "y": 4
           },
           "hiddenSeries": false,
           "id": 43,
@@ -893,7 +1715,7 @@
             "h": 8,
             "w": 11,
             "x": 0,
-            "y": 10
+            "y": 12
           },
           "hiddenSeries": false,
           "id": 14,
@@ -996,7 +1818,7 @@
             "h": 8,
             "w": 13,
             "x": 11,
-            "y": 10
+            "y": 12
           },
           "hiddenSeries": false,
           "id": 16,
@@ -1092,7 +1914,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 2
+        "y": 8
       },
       "id": 39,
       "panels": [
@@ -1114,7 +1936,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 3
+            "y": 5
           },
           "hiddenSeries": false,
           "id": 44,
@@ -1217,7 +2039,7 @@
             "h": 8,
             "w": 11,
             "x": 0,
-            "y": 12
+            "y": 14
           },
           "hiddenSeries": false,
           "id": 18,
@@ -1320,7 +2142,7 @@
             "h": 8,
             "w": 13,
             "x": 11,
-            "y": 12
+            "y": 14
           },
           "hiddenSeries": false,
           "id": 45,
@@ -1411,6 +2233,7 @@
           "dashLength": 10,
           "dashes": false,
           "datasource": "Prometheus",
+          "decimals": 0,
           "fieldConfig": {
             "defaults": {
               "custom": {}
@@ -1423,7 +2246,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 20
+            "y": 22
           },
           "hiddenSeries": false,
           "id": 47,
@@ -1519,585 +2342,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 3
-      },
-      "id": 41,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 9,
-            "w": 12,
-            "x": 0,
-            "y": 5
-          },
-          "hiddenSeries": false,
-          "id": 20,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true,
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pluginVersion": "7.3.1",
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(rocketmq_brokeruntime_pmdt_0ms{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"})",
-              "instant": false,
-              "interval": "",
-              "legendFormat": "0ms",
-              "refId": "A"
-            },
-            {
-              "expr": "sum(rocketmq_brokeruntime_pmdt_0to10ms{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"})",
-              "interval": "",
-              "legendFormat": "0-10ms",
-              "refId": "B"
-            },
-            {
-              "expr": "sum(rocketmq_brokeruntime_pmdt_10to50ms{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"})",
-              "interval": "",
-              "legendFormat": "10-50ms",
-              "refId": "C"
-            },
-            {
-              "expr": "sum(rocketmq_brokeruntime_pmdt_50to100ms{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"})",
-              "interval": "",
-              "legendFormat": "50-100ms",
-              "refId": "D"
-            },
-            {
-              "expr": "sum(rocketmq_brokeruntime_pmdt_100to200ms{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"})",
-              "interval": "",
-              "legendFormat": "100-200ms",
-              "refId": "E"
-            },
-            {
-              "expr": "sum(rocketmq_brokeruntime_pmdt_200to500ms{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"})",
-              "interval": "",
-              "legendFormat": "200-500ms",
-              "refId": "F"
-            },
-            {
-              "expr": "sum(rocketmq_brokeruntime_pmdt_500to1s{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"})",
-              "interval": "",
-              "legendFormat": "500ms-1s",
-              "refId": "G"
-            },
-            {
-              "expr": "sum(rocketmq_brokeruntime_pmdt_1to2s{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"})",
-              "interval": "",
-              "legendFormat": "1-2s",
-              "refId": "H"
-            },
-            {
-              "expr": "sum(rocketmq_brokeruntime_pmdt_2to3s{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"})",
-              "interval": "",
-              "legendFormat": "2-3s",
-              "refId": "I"
-            },
-            {
-              "expr": "sum(rocketmq_brokeruntime_pmdt_3to4s{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"})+sum(rocketmq_brokeruntime_pmdt_4to5s{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"})+sum(rocketmq_brokeruntime_pmdt_5to10s{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"})+sum(rocketmq_brokeruntime_pmdt_10stomore{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"})",
-              "interval": "",
-              "legendFormat": ">3s",
-              "refId": "J"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "broker每分钟写入消息不同耗时区间趋势",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:62662",
-              "decimals": null,
-              "format": "none",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "$$hashKey": "object:62663",
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 9,
-            "w": 12,
-            "x": 12,
-            "y": 5
-          },
-          "hiddenSeries": false,
-          "id": 57,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": true,
-            "max": true,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "sort": "current",
-            "sortDesc": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true,
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pluginVersion": "7.3.1",
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(rocketmq_brokeruntime_pmdt_200to500ms{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"}) by (brokerName) + sum(rocketmq_brokeruntime_pmdt_500to1s{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"}) by (brokerName)+sum(rocketmq_brokeruntime_pmdt_1to2s{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"}) by (brokerName)+sum(rocketmq_brokeruntime_pmdt_2to3s{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"}) by (brokerName)+sum(rocketmq_brokeruntime_pmdt_3to4s{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"}) by (brokerName)+sum(rocketmq_brokeruntime_pmdt_4to5s{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"}) by (brokerName)+sum(rocketmq_brokeruntime_pmdt_5to10s{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"}) by (brokerName)+sum(rocketmq_brokeruntime_pmdt_10stomore{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"}) by (brokerName)",
-              "interval": "",
-              "legendFormat": "{{brokerName}}",
-              "refId": "F"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "broker可能限流（写入耗时超过200ms的消息数大于0）",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:62662",
-              "decimals": null,
-              "format": "none",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "$$hashKey": "object:62663",
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "datasource": "Prometheus",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "custom": {},
-              "mappings": [],
-              "max": 100,
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "purple",
-                    "value": null
-                  },
-                  {
-                    "color": "green",
-                    "value": 0
-                  },
-                  {
-                    "color": "blue",
-                    "value": 60
-                  },
-                  {
-                    "color": "yellow",
-                    "value": 70
-                  },
-                  {
-                    "color": "red",
-                    "value": 85
-                  }
-                ]
-              },
-              "unit": "percent"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 24,
-            "x": 0,
-            "y": 14
-          },
-          "id": 24,
-          "interval": "",
-          "links": [],
-          "options": {
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": true,
-            "showThresholdMarkers": true
-          },
-          "pluginVersion": "7.3.1",
-          "targets": [
-            {
-              "expr": "rocketmq_brokeruntime_commitlog_disk_ratio{Cluster=\"$cluster\",Env=\"$env\"}*100",
-              "instant": true,
-              "interval": "",
-              "legendFormat": "{{brokerIP}}",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "磁盘空间使用百分比",
-          "type": "gauge"
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 10,
-            "w": 24,
-            "x": 0,
-            "y": 21
-          },
-          "hiddenSeries": false,
-          "id": 10,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": true,
-            "hideEmpty": true,
-            "hideZero": true,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "sort": "current",
-            "sortDesc": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true,
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pluginVersion": "7.3.1",
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(rocketmq_group_get_latency_by_storetime{Cluster=\"$cluster\",Env=\"$env\",broker=~\"$broker\",group=~\"$group\",topic=~\"$topic\"}) by(group, topic, broker)",
-              "interval": "",
-              "legendFormat": "{{broker}}-{{topic}}@{{group}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "消息消费的滞后时间（发送到broker经过多少时间还未消费）",
-          "tooltip": {
-            "shared": true,
-            "sort": 2,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "ms",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "description": "broker收到请求后暂存队列，经过多久后才进行处理，反映broker此时的繁忙程度",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 8,
-            "w": 24,
-            "x": 0,
-            "y": 31
-          },
-          "hiddenSeries": false,
-          "id": 28,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": true,
-            "hideEmpty": true,
-            "hideZero": false,
-            "max": true,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true,
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pluginVersion": "7.3.1",
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatDirection": "h",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "rocketmq_brokeruntime_send_threadpoolqueue_headwait_timemills{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"}",
-              "instant": false,
-              "interval": "",
-              "legendFormat": "{{brokerName}}-发送请求",
-              "refId": "C"
-            },
-            {
-              "expr": "rocketmq_brokeruntime_pull_threadpoolqueue_headwait_timemills{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"}",
-              "instant": false,
-              "interval": "",
-              "legendFormat": "{{brokerName}}-拉取请求",
-              "refId": "A"
-            },
-            {
-              "expr": "rocketmq_brokeruntime_query_threadpoolqueue_headwait_timemills{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"}",
-              "instant": false,
-              "interval": "",
-              "legendFormat": "{{brokerName}}-查询请求",
-              "refId": "B"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "请求等待处理耗时",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:64952",
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "$$hashKey": "object:64953",
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        }
-      ],
-      "title": "集群运行状态",
-      "type": "row"
-    },
-    {
-      "collapsed": true,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 4
+        "y": 9
       },
       "id": 49,
       "panels": [
@@ -2116,7 +2361,7 @@
             "h": 11,
             "w": 24,
             "x": 0,
-            "y": 5
+            "y": 6
           },
           "id": 51,
           "pageSize": 20,
@@ -2127,7 +2372,6 @@
           },
           "styles": [
             {
-              "$$hashKey": "object:33450",
               "alias": "消费组",
               "align": "auto",
               "colorMode": null,
@@ -2150,7 +2394,6 @@
               "unit": "short"
             },
             {
-              "$$hashKey": "object:33451",
               "alias": "Topic",
               "align": "auto",
               "colorMode": null,
@@ -2169,7 +2412,6 @@
               "unit": "bytes"
             },
             {
-              "$$hashKey": "object:33452",
               "alias": "客户端地址",
               "align": "auto",
               "colorMode": "value",
@@ -2187,7 +2429,6 @@
               "unit": "none"
             },
             {
-              "$$hashKey": "object:33453",
               "alias": "客户端ID",
               "align": "auto",
               "colorMode": null,
@@ -2205,7 +2446,6 @@
               "unit": "none"
             },
             {
-              "$$hashKey": "object:39496",
               "alias": "消费失败量",
               "align": "auto",
               "colorMode": "cell",
@@ -2215,7 +2455,7 @@
                 "rgba(245, 54, 54, 0.9)"
               ],
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
+              "decimals": 0,
               "mappingType": 1,
               "pattern": "Value",
               "thresholds": [
@@ -2226,7 +2466,6 @@
               "unit": "short"
             },
             {
-              "$$hashKey": "object:37380",
               "alias": "",
               "align": "auto",
               "colorMode": null,
@@ -2278,7 +2517,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 16
+            "y": 17
           },
           "hiddenSeries": false,
           "id": 52,
@@ -2342,7 +2581,6 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:45393",
               "format": "none",
               "label": null,
               "logBase": 1,
@@ -2351,7 +2589,6 @@
               "show": true
             },
             {
-              "$$hashKey": "object:45394",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -2383,7 +2620,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 26
+            "y": 27
           },
           "hiddenSeries": false,
           "id": 56,
@@ -2447,7 +2684,6 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:45393",
               "format": "none",
               "label": null,
               "logBase": 1,
@@ -2456,7 +2692,6 @@
               "show": true
             },
             {
-              "$$hashKey": "object:45394",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -2488,7 +2723,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 26
+            "y": 27
           },
           "hiddenSeries": false,
           "id": 54,
@@ -2552,7 +2787,6 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:45393",
               "format": "none",
               "label": null,
               "logBase": 1,
@@ -2561,7 +2795,6 @@
               "show": true
             },
             {
-              "$$hashKey": "object:45394",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -2593,7 +2826,7 @@
             "h": 10,
             "w": 12,
             "x": 0,
-            "y": 36
+            "y": 37
           },
           "hiddenSeries": false,
           "id": 53,
@@ -2657,7 +2890,6 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:45393",
               "format": "ms",
               "label": null,
               "logBase": 1,
@@ -2666,7 +2898,6 @@
               "show": true
             },
             {
-              "$$hashKey": "object:45394",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -2698,7 +2929,7 @@
             "h": 10,
             "w": 12,
             "x": 12,
-            "y": 36
+            "y": 37
           },
           "hiddenSeries": false,
           "id": 55,
@@ -2762,7 +2993,6 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:45393",
               "format": "ms",
               "label": null,
               "logBase": 1,
@@ -2771,7 +3001,6 @@
               "show": true
             },
             {
-              "$$hashKey": "object:45394",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -2796,7 +3025,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 5
+        "y": 10
       },
       "id": 59,
       "panels": [
@@ -2823,14 +3052,14 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 6,
             "w": 8,
             "x": 0,
-            "y": 6
+            "y": 7
           },
           "id": 61,
           "options": {
-            "displayMode": "gradient",
+            "displayMode": "lcd",
             "orientation": "horizontal",
             "reduceOptions": {
               "calcs": [
@@ -2844,10 +3073,10 @@
           "pluginVersion": "7.3.1",
           "targets": [
             {
-              "expr": "rocketmq_brokeruntime_commitlog_minoffset{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"}",
+              "expr": "rocketmq_brokeruntime_commitlog_minoffset{Cluster=\"$cluster\",Env=\"$env\"}",
               "instant": true,
               "interval": "",
-              "legendFormat": "{{brokerName}}",
+              "legendFormat": "{{brokerIP}}",
               "refId": "A"
             }
           ],
@@ -2879,12 +3108,12 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 6,
             "w": 8,
             "x": 8,
-            "y": 6
+            "y": 7
           },
-          "id": 62,
+          "id": 63,
           "options": {
             "displayMode": "gradient",
             "orientation": "horizontal",
@@ -2900,16 +3129,16 @@
           "pluginVersion": "7.3.1",
           "targets": [
             {
-              "expr": "rocketmq_brokeruntime_commitlog_maxoffset{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"}",
+              "expr": "rocketmq_brokeruntime_commitlog_maxoffset{Cluster=\"$cluster\",Env=\"$env\"} - rocketmq_brokeruntime_commitlog_minoffset{Cluster=\"$cluster\",Env=\"$env\"}",
               "instant": true,
               "interval": "",
-              "legendFormat": "{{brokerName}}",
+              "legendFormat": "{{brokerIP}}",
               "refId": "A"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "commit log最大位点",
+          "title": "消息量",
           "type": "bargauge"
         },
         {
@@ -2935,14 +3164,14 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 6,
             "w": 8,
             "x": 16,
-            "y": 6
+            "y": 7
           },
-          "id": 63,
+          "id": 62,
           "options": {
-            "displayMode": "gradient",
+            "displayMode": "lcd",
             "orientation": "horizontal",
             "reduceOptions": {
               "calcs": [
@@ -2956,16 +3185,16 @@
           "pluginVersion": "7.3.1",
           "targets": [
             {
-              "expr": "rocketmq_brokeruntime_commitlog_maxoffset{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"} - rocketmq_brokeruntime_commitlog_minoffset{Cluster=\"$cluster\",Env=\"$env\",brokerName=~\"$broker\"}",
+              "expr": "rocketmq_brokeruntime_commitlog_maxoffset{Cluster=\"$cluster\",Env=\"$env\"}",
               "instant": true,
               "interval": "",
-              "legendFormat": "{{brokerName}}",
+              "legendFormat": "{{brokerIP}}",
               "refId": "A"
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "消息量",
+          "title": "commit log最大位点",
           "type": "bargauge"
         },
         {
@@ -2983,7 +3212,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 14
+            "y": 13
           },
           "id": 64,
           "pageSize": 20,
@@ -2994,7 +3223,6 @@
           },
           "styles": [
             {
-              "$$hashKey": "object:33450",
               "alias": "Topic",
               "align": "auto",
               "colorMode": null,
@@ -3017,7 +3245,6 @@
               "unit": "short"
             },
             {
-              "$$hashKey": "object:39496",
               "alias": "生产位点",
               "align": "auto",
               "colorMode": null,
@@ -3038,7 +3265,6 @@
               "unit": "none"
             },
             {
-              "$$hashKey": "object:37380",
               "alias": "",
               "align": "auto",
               "colorMode": null,
@@ -3087,7 +3313,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 14
+            "y": 13
           },
           "id": 65,
           "pageSize": 20,
@@ -3098,7 +3324,6 @@
           },
           "styles": [
             {
-              "$$hashKey": "object:33450",
               "alias": "Topic",
               "align": "auto",
               "colorMode": null,
@@ -3121,7 +3346,6 @@
               "unit": "short"
             },
             {
-              "$$hashKey": "object:39496",
               "alias": "生产位点",
               "align": "auto",
               "colorMode": null,
@@ -3142,7 +3366,6 @@
               "unit": "none"
             },
             {
-              "$$hashKey": "object:37380",
               "alias": "",
               "align": "auto",
               "colorMode": null,
@@ -3191,7 +3414,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 14
+            "y": 13
           },
           "id": 66,
           "pageSize": 20,
@@ -3202,7 +3425,6 @@
           },
           "styles": [
             {
-              "$$hashKey": "object:33450",
               "alias": "消费组",
               "align": "auto",
               "colorMode": null,
@@ -3225,7 +3447,6 @@
               "unit": "short"
             },
             {
-              "$$hashKey": "object:39496",
               "alias": "生产位点",
               "align": "auto",
               "colorMode": null,
@@ -3246,7 +3467,6 @@
               "unit": "none"
             },
             {
-              "$$hashKey": "object:37380",
               "alias": "",
               "align": "auto",
               "colorMode": null,
@@ -3295,7 +3515,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 22
+            "y": 21
           },
           "id": 67,
           "pageSize": 20,
@@ -3306,7 +3526,6 @@
           },
           "styles": [
             {
-              "$$hashKey": "object:33450",
               "alias": "消费组",
               "align": "auto",
               "colorMode": null,
@@ -3329,7 +3548,6 @@
               "unit": "short"
             },
             {
-              "$$hashKey": "object:39496",
               "alias": "消费位点",
               "align": "auto",
               "colorMode": null,
@@ -3350,7 +3568,6 @@
               "unit": "none"
             },
             {
-              "$$hashKey": "object:66557",
               "alias": "Topic",
               "align": "auto",
               "colorMode": null,
@@ -3368,7 +3585,6 @@
               "unit": "short"
             },
             {
-              "$$hashKey": "object:66967",
               "alias": "Broker",
               "align": "auto",
               "colorMode": null,
@@ -3386,7 +3602,6 @@
               "unit": "short"
             },
             {
-              "$$hashKey": "object:37380",
               "alias": "",
               "align": "auto",
               "colorMode": null,
@@ -3435,8 +3650,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "测试",
-          "value": "测试"
+          "text": "开发",
+          "value": "开发"
         },
         "datasource": "Prometheus",
         "definition": "label_values(rocketmq_broker_tps,Env)",
@@ -3462,8 +3677,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "test-2m-2s",
-          "value": "test-2m-2s"
+          "text": "dev-rmq",
+          "value": "dev-rmq"
         },
         "datasource": "Prometheus",
         "definition": "label_values(rocketmq_broker_tps{Env=~\"$env\"},Cluster)",
@@ -3611,6 +3826,6 @@
   },
   "timezone": "",
   "title": "rocketmq",
-  "uid": "zkVx1w_iz",
-  "version": 20
+  "uid": "1zkVx1w_iz",
+  "version": 7
 }
