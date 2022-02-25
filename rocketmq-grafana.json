@@ -16,11 +16,11 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 9,
-  "iteration": 1645687337625,
+  "iteration": 1645759151340,
   "links": [],
   "panels": [
     {
-      "collapsed": false,
+      "collapsed": true,
       "datasource": null,
       "gridPos": {
         "h": 1,
@@ -29,131 +29,150 @@
         "y": 0
       },
       "id": 71,
-      "panels": [],
+      "panels": [
+        {
+          "columns": [],
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {}
+            },
+            "overrides": []
+          },
+          "fontSize": "80%",
+          "gridPos": {
+            "h": 4,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 69,
+          "pageSize": 20,
+          "showHeader": true,
+          "sort": {
+            "col": null,
+            "desc": false
+          },
+          "styles": [
+            {
+              "$$hashKey": "object:11326",
+              "alias": "Broker 名称",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "link": false,
+              "linkTargetBlank": false,
+              "linkTooltip": "消费端明细",
+              "linkUrl": "d/zkVx1w_iz/rocketmq?orgId=1&var-env=${Env}&var-cluster=${Cluster}&var-broker=${broker}&var-topic=All&var-group=$group",
+              "mappingType": 1,
+              "pattern": "broker",
+              "preserveFormat": false,
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "$$hashKey": "object:11327",
+              "alias": "broker IP",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": null,
+              "mappingType": 1,
+              "pattern": "brokerIP",
+              "thresholds": [
+                "1",
+                "100"
+              ],
+              "type": "number",
+              "unit": "none"
+            },
+            {
+              "$$hashKey": "object:11328",
+              "alias": "集群",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "cluster",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "$$hashKey": "object:11794",
+              "alias": "最早的消息时间",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss.SSS",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Value #B",
+              "thresholds": [],
+              "type": "date",
+              "unit": "short"
+            },
+            {
+              "$$hashKey": "object:11329",
+              "alias": "",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "expr": "rocketmq_broker_tps{Cluster=\"$cluster\",Env=\"$env\"}",
+              "format": "table",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "集群信息",
+              "refId": "A"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "集群信息",
+          "transform": "table",
+          "type": "table-old"
+        }
+      ],
       "title": "集群信息",
       "type": "row"
-    },
-    {
-      "columns": [],
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "fontSize": "80%",
-      "gridPos": {
-        "h": 4,
-        "w": 24,
-        "x": 0,
-        "y": 1
-      },
-      "id": 69,
-      "pageSize": 20,
-      "showHeader": true,
-      "sort": {
-        "col": null,
-        "desc": false
-      },
-      "styles": [
-        {
-          "$$hashKey": "object:14904",
-          "alias": "Broker 名称",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": false,
-          "linkTargetBlank": false,
-          "linkTooltip": "消费端明细",
-          "linkUrl": "d/zkVx1w_iz/rocketmq?orgId=1&var-env=${Env}&var-cluster=${Cluster}&var-broker=${broker}&var-topic=All&var-group=$group",
-          "mappingType": 1,
-          "pattern": "broker",
-          "preserveFormat": false,
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:14905",
-          "alias": "broker IP",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": null,
-          "mappingType": 1,
-          "pattern": "brokerIP",
-          "thresholds": [
-            "1",
-            "100"
-          ],
-          "type": "number",
-          "unit": "none"
-        },
-        {
-          "$$hashKey": "object:14906",
-          "alias": "集群",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "cluster",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:14908",
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "expr": "rocketmq_broker_tps{Cluster=\"$cluster\",Env=\"$env\",broker=~\"$broker\"}",
-          "format": "table",
-          "instant": true,
-          "interval": "",
-          "legendFormat": "集群信息",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "集群信息",
-      "transform": "table",
-      "type": "table-old"
     },
     {
       "collapsed": true,
@@ -162,7 +181,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 5
+        "y": 1
       },
       "id": 41,
       "panels": [
@@ -211,7 +230,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 6
+            "y": 2
           },
           "id": 24,
           "interval": "",
@@ -263,7 +282,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 13
+            "y": 9
           },
           "hiddenSeries": false,
           "id": 20,
@@ -420,7 +439,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 13
+            "y": 9
           },
           "hiddenSeries": false,
           "id": 57,
@@ -525,7 +544,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 22
+            "y": 18
           },
           "hiddenSeries": false,
           "id": 28,
@@ -647,7 +666,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 22
+            "y": 18
           },
           "hiddenSeries": false,
           "id": 68,
@@ -711,7 +730,6 @@
           },
           "yaxes": [
             {
-              "$$hashKey": "object:7758",
               "decimals": 2,
               "format": "bytes",
               "label": null,
@@ -721,7 +739,6 @@
               "show": true
             },
             {
-              "$$hashKey": "object:7759",
               "decimals": 0,
               "format": "short",
               "label": null,
@@ -754,7 +771,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 30
+            "y": 26
           },
           "hiddenSeries": false,
           "id": 10,
@@ -838,6 +855,215 @@
             "align": false,
             "alignLevel": null
           }
+        },
+        {
+          "columns": [],
+          "datasource": "Prometheus",
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {}
+            },
+            "overrides": []
+          },
+          "fontSize": "80%",
+          "gridPos": {
+            "h": 4,
+            "w": 24,
+            "x": 0,
+            "y": 36
+          },
+          "id": 72,
+          "pageSize": 20,
+          "showHeader": true,
+          "sort": {
+            "col": null,
+            "desc": false
+          },
+          "styles": [
+            {
+              "$$hashKey": "object:5172",
+              "alias": "broker IP",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": null,
+              "mappingType": 1,
+              "pattern": "brokerIP",
+              "thresholds": [
+                "1",
+                "100"
+              ],
+              "type": "string",
+              "unit": "none"
+            },
+            {
+              "$$hashKey": "object:5173",
+              "alias": "昨天生产消息数",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 0,
+              "mappingType": 1,
+              "pattern": "Value #A",
+              "thresholds": [],
+              "type": "number",
+              "unit": "none"
+            },
+            {
+              "$$hashKey": "object:5174",
+              "alias": "今天生产消息数",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 0,
+              "mappingType": 1,
+              "pattern": "Value #B",
+              "thresholds": [],
+              "type": "number",
+              "unit": "none"
+            },
+            {
+              "$$hashKey": "object:5413",
+              "alias": "昨天消费消息数",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 0,
+              "mappingType": 1,
+              "pattern": "Value #C",
+              "thresholds": [],
+              "type": "number",
+              "unit": "none"
+            },
+            {
+              "$$hashKey": "object:9276",
+              "alias": "今天消费消息数",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 0,
+              "mappingType": 1,
+              "pattern": "Value #D",
+              "thresholds": [],
+              "type": "number",
+              "unit": "none"
+            },
+            {
+              "$$hashKey": "object:17774",
+              "alias": "最早的有效消息时间",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss.SSS",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Value #E",
+              "thresholds": [],
+              "type": "date",
+              "unit": "short"
+            },
+            {
+              "$$hashKey": "object:5175",
+              "alias": "",
+              "align": "auto",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "expr": "rocketmq_brokeruntime_msg_puttotal_todaymorning{Cluster=\"$cluster\",Env=\"$env\"}-rocketmq_brokeruntime_msg_puttotal_yesterdaymorning{Cluster=\"$cluster\",Env=\"$env\"}",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "昨天写入",
+              "refId": "A"
+            },
+            {
+              "expr": "rocketmq_brokeruntime_msg_put_total_today_now{Cluster=\"$cluster\",Env=\"$env\"} - rocketmq_brokeruntime_msg_puttotal_todaymorning{Cluster=\"$cluster\",Env=\"$env\"}",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "今天写入",
+              "refId": "B"
+            },
+            {
+              "expr": "rocketmq_brokeruntime_msg_gettotal_todaymorning{Cluster=\"$cluster\",Env=\"$env\"}-rocketmq_brokeruntime_msg_gettotal_yesterdaymorning{Cluster=\"$cluster\",Env=\"$env\"}",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "昨天读出",
+              "refId": "C"
+            },
+            {
+              "expr": "rocketmq_brokeruntime_msg_gettotal_today_now{Cluster=\"$cluster\",Env=\"$env\"} - rocketmq_brokeruntime_msg_gettotal_todaymorning{Cluster=\"$cluster\",Env=\"$env\"}",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "今天读出",
+              "refId": "D"
+            },
+            {
+              "expr": "rocketmq_brokeruntime_earliest_message_timestamp{Cluster=\"$cluster\",Env=\"$env\"}",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "min消息时间",
+              "refId": "E"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "消息状态",
+          "transform": "table",
+          "transformations": [],
+          "type": "table-old"
         }
       ],
       "title": "集群运行状态",
@@ -850,7 +1076,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 6
+        "y": 2
       },
       "id": 35,
       "panels": [
@@ -931,6 +1157,7 @@
           },
           "yaxes": [
             {
+              "$$hashKey": "object:16195",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -939,6 +1166,7 @@
               "show": true
             },
             {
+              "$$hashKey": "object:16196",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -1487,7 +1715,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 3
       },
       "id": 37,
       "panels": [
@@ -1914,7 +2142,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 4
       },
       "id": 39,
       "panels": [
@@ -2342,7 +2570,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 5
       },
       "id": 49,
       "panels": [
@@ -3025,7 +3253,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 6
       },
       "id": 59,
       "panels": [
@@ -3827,5 +4055,5 @@
   "timezone": "",
   "title": "rocketmq",
   "uid": "1zkVx1w_iz",
-  "version": 7
+  "version": 11
 }
