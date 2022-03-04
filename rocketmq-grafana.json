@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 9,
-  "iteration": 1645759151340,
+  "iteration": 1646363608714,
   "links": [],
   "panels": [
     {
@@ -3905,8 +3905,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "dev-rmq",
-          "value": "dev-rmq"
+          "text": "local",
+          "value": "local"
         },
         "datasource": "Prometheus",
         "definition": "label_values(rocketmq_broker_tps{Env=~\"$env\"},Cluster)",
@@ -4053,7 +4053,7 @@
     ]
   },
   "timezone": "",
-  "title": "rocketmq",
+  "title": "rocketmq-exporter",
   "uid": "1zkVx1w_iz",
-  "version": 11
+  "version": 13
 }
