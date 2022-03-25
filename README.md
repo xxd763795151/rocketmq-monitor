@@ -20,7 +20,7 @@ prometheus.yml增加如下示例配置：
 
 ### 配置Grafana
 
-将目录下的grafana.json作Dashboard导入到grafana中。
+将目录下的rocketmq-grafana.json作Dashboard导入到grafana中。
 
 ## 告警配置
 
